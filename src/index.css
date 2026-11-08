@@ -1,111 +1,129 @@
+@import "tailwindcss";
+@config "../tailwind.config.js";
+@import "react-toastify/dist/ReactToastify.css";
+
+/* Base font and color definitions */
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+  --color-desk: #F7EFEA;
+  --color-paper: #FFFDF9;
+  --color-ruled: #EAE0D5;
+  --color-coral: #F4A298;
+  --color-ink: #4A403A;
+  --color-yellow: #FFF3B0;
+  --color-green: #D8E2DC;
+  --color-peach: #FFE5D9;
+  --color-lavender: #E8DFF5;
 }
 
 body {
+  font-family: 'Roboto Mono', monospace;
+  background-color: var(--color-desk);
+  color: var(--color-ink);
+  min-height: 100vh;
   margin: 0;
+  padding: 0;
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+/* Notebook ruled paper background */
+.notebook-ruled-bg {
+  background-color: #FFFDF9;
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    #EAE0D5 31px,
+    #EAE0D5 32px
+  );
+  background-position: 0 12px;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* Notebook paper subtle texture & shadow */
+.notebook-shadow {
+  box-shadow: 
+    -1px 0 0 rgba(74, 64, 58, 0.08),
+    0 20px 30px -10px rgba(74, 64, 58, 0.18),
+    0 4px 6px -2px rgba(74, 64, 58, 0.05),
+    4px 4px 0px rgba(234, 224, 213, 0.6);
 }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
-  margin: 0;
+/* Spiral binding rings */
+.spiral-ring {
+  position: relative;
+  width: 32px;
+  height: 12px;
+  background: linear-gradient(180deg, #A8A29E 0%, #E7E5E4 40%, #78716C 100%);
+  border-radius: 9999px;
+  box-shadow: 0 2px 4px rgba(74, 64, 58, 0.25), inset 0 1px 1px rgba(255, 255, 255, 0.8);
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+.spiral-ring::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: rgba(74, 64, 58, 0.2);
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
+/* Coral vertical margin line */
+.margin-line {
+  border-left: 2px solid #F4A298;
+}
+
+/* Sticky note raised effect */
+.sticky-tab {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 -2px 6px -1px rgba(74, 64, 58, 0.08);
+}
+
+.sticky-tab:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 -4px 10px -1px rgba(74, 64, 58, 0.15);
+}
+
+.sticky-tab.active {
+  transform: translateY(-4px);
+  box-shadow: 0 -6px 12px -2px rgba(74, 64, 58, 0.18);
+  border-bottom: 2px solid #FFFDF9;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F7EFEA;
+}
+::-webkit-scrollbar-thumb {
+  background: #D8E2DC;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #F4A298;
+}
+
+/* React Toastify Cozy Customization */
+.Toastify__toast {
+  font-family: 'Roboto Mono', monospace !important;
+  border-radius: 8px !important;
+  border: 1px solid #EAE0D5 !important;
+  box-shadow: 0 8px 16px -4px rgba(74, 64, 58, 0.15) !important;
+  font-size: 0.85rem !important;
+  color: #4A403A !important;
+  background-color: #FFFDF9 !important;
+}
+
+.Toastify__toast--success {
+  border-left: 6px solid #84A98C !important;
+}
+.Toastify__toast--info {
+  border-left: 6px solid #6C7A89 !important;
+}
+.Toastify__toast--warning {
+  border-left: 6px solid #E9C46A !important;
+}
+.Toastify__toast--error {
+  border-left: 6px solid #F4A298 !important;
 }
